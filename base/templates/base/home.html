@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta chrset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KARE OSS Mini Blog Page</title>
+    <style>
+      p {
+        font-size: 25px;
+        font-weight: 400;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      h3 {
+        font-size: 30px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+
+      .heading {
+        font-size: 45px;
+        font-weight: 500;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        text-align: center;
+      }
+
+      .createblog {
+        text-align: end;
+        padding-right: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    {% extends 'main.html' %} {% block content %}
+    <br />
+    <h1 class="heading">
+      <strong>Kare Open Source Society</strong> Welcomes you to the Bootcamp_2
+      on
+      <strong>Django</strong>
+    </h1>
+    <hr />
+    <div>
+      <h3 class="createblog">
+        <a href="{% url 'create-blog' %}" style="text-decoration: none"
+          >Create a New Blog</a
+        >
+      </h3>
+
+      <h3>List of Blogs</h3>
+
+      <div>
+        {% for blog in blogs %}
+        <div>
+          <div class="curdoperations">
+            <p>
+              <a
+                href="{% url 'update-blog' blog.id %}"
+                style="text-decoration: none"
+                >Edit Blog</a
+              >
+              <a
+                href="{% url 'delete-blog' blog.id %}"
+                style="text-decoration: none"
+                >Delete Blog</a
+              >
+            </p>
+          </div>
+          <p style="font-weight: 600">Published by @{{blog.host}}</p>
+          <p>
+            {{blog.id}} --
+            <a href="{% url 'blog' blog.id %}" style="text-decoration: none"
+              >{{blog.name}}</a
+            >
+          </p>
+          <hr />
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% endblock content %}
+  </body>
+</html>
